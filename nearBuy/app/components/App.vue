@@ -9,11 +9,18 @@
         </ActionBar>
         <WrapLayout>
             <!-- <SearchBar hint="Search hint" :text="searchPhrase" @textChange="onTextChanged" @submit="onSubmit" /> -->
-            <SearchBar hint="What are you looking for today?" v-model="searchQuery" @submit="onButtonTap" />
+            <SearchBar hint="Search.." v-model="searchQuery" @submit="onButtonTap" width="100%"/>
             <ListView  for="product in searchedProds" @itemTap="onProductTap">
             <v-template>
+            <GridLayout class="list-group-item" rows="*" columns="auto, *">
             <!-- Shows the list item label in the default color and style. -->
-            <Label :text="product.name" />
+            <Image row="0" col="0" src="https://firebasestorage.googleapis.com/v0/b/nearbuy-3d083.appspot.com/o/products%2F29741939-1.png?alt=media&token=af304319-6823-4005-aa0f-7c14501763cc" width="100" height="100"/>
+            <Label :text="product.name" row="0" col="1" id="product" />
+            <Label text="AVAILABLE" row="1" col="1" id="availability" />
+            <Label text="at Zani's (500m)" row="1" col="2" id="place" />
+            <Label text="10€" row="0" col="2" id="price" />
+
+            </GridLayout> 
             </v-template>
             </ListView>
 
@@ -140,13 +147,19 @@ ActionBar {
   color: #ffffff;
 }
 
-.message {
-  vertical-align: center;
-  text-align: center;
-  font-size: 20;
-  color: #333333;
-}
 
+#availability{
+  margin-top:60;
+  margin-right:58%;
+  margin-bottom: 20;
+  border: none;
+  background-color: #27AE60;
+  width: 20%;
+  text-align: center;
+  border-radius: 40%;
+  color: #ffffff;
+      
+}
 #icon, #nearbuy {
   margin-right: 80%;
   width:100%;
@@ -154,5 +167,27 @@ ActionBar {
 TabView {
   margin-top: 90%;
   transform: translateY(-100%);
+}
+#product {
+  font-size:25;
+  margin-top: 10;
+  padding-right: 80%;
+}
+.list-group-item{
+  border: 5 solid black ;
+
+}
+#place {
+  margin-top: 60;
+  margin-left:20%;
+}
+#price {
+  margin-left:50%;
+  background-color: #E0E0E0;  
+  width: 12%;
+  height: 20%;
+  text-align: center;
+  font-size: 25;
+
 }
 </style>
