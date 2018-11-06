@@ -23,6 +23,7 @@
                     <Label text="Content for Tab 1" />
                 </TabViewItem>
             </TabView>
+
         </WrapLayout>
     </Page>
 </template>
@@ -56,7 +57,7 @@ export default {
     onButtonTap() {
       //console.log(this.$data.textFieldValue);
       console.log('you just did onSubmit');
-      //let rawInput = this.$data.textFieldValue;
+      this.$data.searchedProds = []
       let rawInput = this.$data.searchQuery;
       let vm = this;
       let promise;
@@ -134,7 +135,7 @@ ActionBar {
 }
 
 TabView {
-  margin-top: 100%;
+  margin-top: 90%;
   transform: translateY(-100%);
 }
 </style>
