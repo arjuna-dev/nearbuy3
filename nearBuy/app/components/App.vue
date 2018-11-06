@@ -1,31 +1,30 @@
 
 <template>
-    <Page>
-        <ActionBar title="nearBuy"/>
-        <WrapLayout>
-            <!-- <SearchBar hint="Search hint" :text="searchPhrase" @textChange="onTextChanged" @submit="onSubmit" /> -->
+  <Page>
+    <ActionBar title="nearBuy"></ActionBar>
+      <TabView androidTabsPosition="bottom" selectedIndex="selectedIndex">
+        <TabViewItem title="Tab 1" iconSource="res://icon">                
+          <WrapLayout>
             <SearchBar hint="What are you looking for today?" v-model="searchQuery" @submit="onButtonTap" />
             <ListView  for="product in searchedProds" @itemTap="onProductTap">
             <v-template>
-            <!-- Shows the list item label in the default color and style. -->
             <Label :text="product.name" />
             </v-template>
             </ListView>
-
-            <TabView selectedIndex="selectedIndex">
-                <TabViewItem title="Tab 1" iconSource="res://icon">
-                    <Label text="Content for Tab 1" />
-                </TabViewItem>
-                <TabViewItem title="Tab 2" iconSource="res://icon">
-                    <Label text="Content for Tab 1" />
-                </TabViewItem>
-                <TabViewItem title="Tab 3" iconSource="res://drawable-mdpi/icon.png">
-                    <Label text="Content for Tab 1" />
-                </TabViewItem>
-            </TabView>
-
+          </WrapLayout>
+        </TabViewItem>
+        <TabViewItem title="Tab 2" iconSource="res://icon">
+        <WrapLayout>
+          <Label text="Content for Tab 2" />
         </WrapLayout>
-    </Page>
+        </TabViewItem>
+        <TabViewItem title="Tab 3" iconSource="res://drawable-mdpi/icon.png">
+        <WrapLayout>
+          <Label text="Content for Tab 3" />
+        </WrapLayout>
+        </TabViewItem>
+      </TabView>
+  </Page>
 </template>
 
 
@@ -122,20 +121,15 @@ export default {
 </script>
 
 <style scoped>
+
+/* Page{
+  height: 100%;
+} */
 ActionBar {
   background-color: #6202EE;
   color: #ffffff;
 }
 
-.message {
-  vertical-align: center;
-  text-align: center;
-  font-size: 20;
-  color: #333333;
-}
-
 TabView {
-  margin-top: 90%;
-  transform: translateY(-100%);
 }
 </style>
