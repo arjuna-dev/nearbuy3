@@ -1,7 +1,12 @@
 
 <template>
     <Page>
-        <ActionBar title="nearBuy"/>
+        <ActionBar>
+          <StackLayout orientation="horizontal">
+            <Image src="res://icon" width="40" height="40" verticalAlignment="center" />
+            <Label text="ativeScript" fontSize="24" verticalAlignment="center" />
+          </StackLayout>
+        </ActionBar>
         <WrapLayout>
             <!-- <SearchBar hint="Search hint" :text="searchPhrase" @textChange="onTextChanged" @submit="onSubmit" /> -->
             <SearchBar hint="What are you looking for today?" v-model="searchQuery" @submit="onButtonTap" />
@@ -12,17 +17,19 @@
             </v-template>
             </ListView>
 
-            <TabView selectedIndex="selectedIndex">
+            <TabView :selectedIndex="selectedIndex" v-model="selectedIndex" @selectedIndexChange="onTabTap">
                 <TabViewItem title="Tab 1" iconSource="res://icon">
-                    <Label text="Content for Tab 1" />
+                    <Label text="" />
                 </TabViewItem>
                 <TabViewItem title="Tab 2" iconSource="res://icon">
-                    <Label text="Content for Tab 1" />
+                    <Label text="" />
                 </TabViewItem>
                 <TabViewItem title="Tab 3" iconSource="res://drawable-mdpi/icon.png">
-                    <Label text="Content for Tab 1" />
+                    <Label text="" />
                 </TabViewItem>
-            </TabView>
+                
+            </TabView>       
+
         </WrapLayout>
     </Page>
 </template>
@@ -32,7 +39,7 @@
 //Importing the map component
 import Map from "./map";
 import { sep } from "path";
-import { login } from 'nativescript-plugin-firebase';
+import { login } from "nativescript-plugin-firebase";
 let searchProductResults = [];
 //Wiring firebase
 const firebase = require("nativescript-plugin-firebase");
@@ -53,9 +60,12 @@ firebase
 console.log("i am app");
 export default {
   methods: {
+    onTabTap() {
+      console.log(this.$data.selectedIndex.value);
+    },
     onButtonTap() {
       //console.log(this.$data.textFieldValue);
-      console.log('you just did onSubmit');
+      console.log("you just did onSubmit");
       //let rawInput = this.$data.textFieldValue;
       let rawInput = this.$data.searchQuery;
       let vm = this;
@@ -96,24 +106,28 @@ export default {
               }
             });
           })
+
           .catch(function(error) {
             console.log("Error getting documents: ", error);
           });
       }
+
       //console.log(this);
     },
-    onProductTap(event){
-        console.log(event.item.name);
-        this.$navigateTo(Map, {props:{barcode: event.item.barcode}});
+    onProductTap(event) {
+      console.log(event.item.name);
+      this.$navigateTo(Map, { props: { barcode: event.item.barcode } });
     }
   },
   data() {
     return {
+      selectedIndex: 0,
       searchQuery: "",
       textFieldValue: "",
       searchedProds: []
     };
   },
+
   created() {
     console.log("created!");
   }
@@ -122,7 +136,7 @@ export default {
 
 <style scoped>
 ActionBar {
-  background-color: #6202EE;
+  background-color: #6202ee;
   color: #ffffff;
 }
 
@@ -131,10 +145,5 @@ ActionBar {
   text-align: center;
   font-size: 20;
   color: #333333;
-}
-
-TabView {
-  margin-top: 100%;
-  transform: translateY(-100%);
 }
 </style>
