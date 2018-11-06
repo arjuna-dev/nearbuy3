@@ -1,10 +1,10 @@
 
 <template>
     <Page>
-        <ActionBar>
-          <StackLayout orientation="horizontal">
-            <Image src="res://icon" width="40" height="40" verticalAlignment="center" />
-            <Label text="ativeScript" fontSize="24" verticalAlignment="center" />
+        <ActionBar class="actionbar">
+          <StackLayout orientation="horizontal" >
+            <Image src="res://icon" width="40" height="40" id="logo"/>
+            <Label text="NearBuy" fontSize="24" id="nearbuy" />
           </StackLayout>
         </ActionBar>
         <WrapLayout>
@@ -18,10 +18,10 @@
             </ListView>
 
             <TabView :selectedIndex="selectedIndex" v-model="selectedIndex" @selectedIndexChange="onTabTap">
-                <TabViewItem title="Tab 1" iconSource="res://icon">
+                <TabViewItem title="" iconSource="res://icon">
                     <Label text="" />
                 </TabViewItem>
-                <TabViewItem title="Tab 2" iconSource="res://icon">
+                <TabViewItem title="Tab 2" iconSource="res://search_icon">
                     <Label text="" />
                 </TabViewItem>
                 <TabViewItem title="Tab 3" iconSource="res://drawable-mdpi/icon.png">
@@ -145,5 +145,14 @@ ActionBar {
   text-align: center;
   font-size: 20;
   color: #333333;
+}
+
+#icon, #nearbuy {
+  margin-right: 80%;
+  width:100%;
+}
+TabView {
+  margin-top: 90%;
+  transform: translateY(-100%);
 }
 </style>
