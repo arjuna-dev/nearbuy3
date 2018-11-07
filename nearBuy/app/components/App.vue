@@ -2,8 +2,8 @@
 <template>
   <Page>
     <ActionBar class="actionbar">
-          <StackLayout orientation="horizontal" >
-            <Image src="res://icon" width="40" height="40" id="logo"/>
+          <StackLayout orientation="horizontal">
+            <Image src="res://logo" width="40" height="40" id="logo" />
             <Label text="NearBuy" fontSize="24" id="nearbuy" />
           </StackLayout>
     </ActionBar>
@@ -66,6 +66,7 @@ firebase
 console.log("i am app");
 export default {
   methods: {
+    
     onTabTap() {
       console.log(this.$data.selectedIndex.value);
     },

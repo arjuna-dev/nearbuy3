@@ -2,7 +2,7 @@
     <Page class="page">
         <ActionBar class="actionbar">
           <StackLayout orientation="horizontal" >
-            <Image src="res://icon" width="40" height="40" id="logo"/>
+            <Image src="res://baseline_keyboard_arrow_left_white_18" width="40" height="40" id="logo" @tap="$navigateBack"/>
             <Label :text="name" fontSize="24" id="nearbuy" />
           </StackLayout>
     </ActionBar>
@@ -61,6 +61,7 @@ export default {
     return {};
   },
   methods: {
+    
     onMapReady(args) {
       
       console.log(this.name);
@@ -91,6 +92,7 @@ export default {
                 lng: doc.data().ycord,
                 title: doc.data().name,
                 subtitle: "Home of The Polyglot Developer!",
+                icon: 'res://map_marker',
                 onCalloutTap: () => {
                   utils.openUrl("https://www.thepolyglotdeveloper.com");
                 }
