@@ -1,14 +1,27 @@
 
 <template>
   <Page>
-    <ActionBar title="nearBuy"></ActionBar>
+    <ActionBar class="actionbar">
+          <StackLayout orientation="horizontal" >
+            <Image src="res://icon" width="40" height="40" id="logo"/>
+            <Label text="NearBuy" fontSize="24" id="nearbuy" />
+          </StackLayout>
+</ActionBar>
       <TabView androidTabsPosition="bottom" selectedIndex="selectedIndex">
         <TabViewItem title="Tab 1" iconSource="res://icon">                
           <WrapLayout>
             <SearchBar hint="What are you looking for today?" v-model="searchQuery" @submit="onButtonTap" />
             <ListView  for="product in searchedProds" @itemTap="onProductTap">
             <v-template>
-            <Label :text="product.name" />
+           <GridLayout class="list-group-item" rows="*" columns="auto, *">
+            <!-- Shows the list item label in the default color and style. -->
+            <Image row="0" col="0" src="https://firebasestorage.googleapis.com/v0/b/nearbuy-3d083.appspot.com/o/products%2F29741939-1.png?alt=media&token=af304319-6823-4005-aa0f-7c14501763cc" width="100" height="100"/>
+            <Label :text="product.name" row="0" col="1" id="product" />
+            <Label text="AVAILABLE" row="1" col="1" id="availability" />
+            <Label text="at Zani's (500m)" row="1" col="2" id="place" />
+            <Label text="10€" row="0" col="2" id="price" />
+
+            </GridLayout> 
             </v-template>
             </ListView>
           </WrapLayout>
@@ -58,8 +71,8 @@ export default {
     },
     onButtonTap() {
       //console.log(this.$data.textFieldValue);
-      console.log('you just did onSubmit');
-      this.$data.searchedProds = []
+      console.log("you just did onSubmit");
+      this.$data.searchedProds = [];
       let rawInput = this.$data.searchQuery;
       let vm = this;
       let promise;
@@ -128,7 +141,6 @@ export default {
 </script>
 
 <style scoped>
-
 /* Page{
   height: 100%;
 } */
@@ -137,46 +149,42 @@ ActionBar {
   color: #ffffff;
 }
 
-
-#availability{
-  margin-top:60;
-  margin-right:58%;
+#availability {
+  margin-top: 60;
+  margin-right: 58%;
   margin-bottom: 20;
   border: none;
-  background-color: #27AE60;
+  background-color: #27ae60;
   width: 20%;
   text-align: center;
   border-radius: 40%;
   color: #ffffff;
-      
 }
-#icon, #nearbuy {
+#icon,
+#nearbuy {
   margin-right: 80%;
-  width:100%;
+  width: 100%;
 }
 TabView {
 }
 #product {
-  font-size:25;
+  font-size: 25;
   margin-top: 10;
   padding-right: 80%;
 }
-.list-group-item{
-  border: 5 solid black ;
-
+.list-group-item {
+  border: 5 solid black;
 }
 #place {
   margin-top: 60;
-  margin-left:20%;
+  margin-left: 20%;
 }
 #price {
-  margin-left:50%;
-  background-color: #E0E0E0;  
+  margin-left: 50%;
+  background-color: #e0e0e0;
   width: 12%;
   height: 20%;
   text-align: center;
   font-size: 25;
-
 }
-
 </style>
