@@ -34,8 +34,7 @@
                 <TabViewItem title="Tab 3" iconSource="res://drawable-mdpi/icon.png">
                     <Label text="" />
                 </TabViewItem>
-                
-            </TabView>       
+            </TabView>
 
         </WrapLayout>
     </Page>
@@ -72,8 +71,8 @@ export default {
     },
     onButtonTap() {
       //console.log(this.$data.textFieldValue);
-      console.log("you just did onSubmit");
-      //let rawInput = this.$data.textFieldValue;
+      console.log('you just did onSubmit');
+      this.$data.searchedProds = []
       let rawInput = this.$data.searchQuery;
       let vm = this;
       let promise;
@@ -190,4 +189,5 @@ TabView {
   font-size: 25;
 
 }
+
 </style>
