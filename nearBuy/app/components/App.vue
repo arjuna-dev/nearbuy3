@@ -6,7 +6,7 @@
             <Image src="res://icon" width="40" height="40" id="logo"/>
             <Label text="NearBuy" fontSize="24" id="nearbuy" />
           </StackLayout>
-</ActionBar>
+    </ActionBar>
       <TabView androidTabsPosition="bottom" selectedIndex="selectedIndex">
         <TabViewItem title="Tab 1" iconSource="res://icon">                
           <WrapLayout>
@@ -122,7 +122,7 @@ export default {
     },
     onProductTap(event) {
       console.log(event.item.name);
-      this.$navigateTo(Map, { props: { barcode: event.item.barcode } });
+      this.$navigateTo(Map, { props: { barcode: event.item.barcode, name:event.item.name} });
     }
   },
   data() {
@@ -174,6 +174,7 @@ TabView {
 }
 .list-group-item {
   border: 5 solid black;
+  z-index: 10;
 }
 #place {
   margin-top: 60;
@@ -186,5 +187,8 @@ TabView {
   height: 20%;
   text-align: center;
   font-size: 25;
+}
+SearchBar{
+  width: 100%
 }
 </style>

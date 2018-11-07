@@ -1,7 +1,26 @@
 <template>
     <Page class="page">
-        <ActionBar class="action-bar" title="nearBuy"></ActionBar>
-        <GridLayout>
+        <ActionBar class="actionbar">
+          <StackLayout orientation="horizontal" >
+            <Image src="res://icon" width="40" height="40" id="logo"/>
+            <Label :text="name" fontSize="24" id="nearbuy" />
+          </StackLayout>
+    </ActionBar>
+    <StackLayout>
+    
+            <!-- Shows the list item label in the default color and style. -->
+             <GridLayout class="list-group-item" rows="*" columns="auto, *">
+            <!-- Shows the list item label in the default color and style. -->
+            <Image row="0" col="0" src="https://firebasestorage.googleapis.com/v0/b/nearbuy-3d083.appspot.com/o/products%2F29741939-1.png?alt=media&token=af304319-6823-4005-aa0f-7c14501763cc" width="100" height="100"/>
+            <Label :text="name" row="0" col="1" id="product" />
+            <Label text="AVAILABLE" row="1" col="1" id="availability" />
+            <Label text="at Zani's (500m)" row="1" col="2" id="place" />
+            <Label text="10€" row="0" col="2" id="price" />
+
+            </GridLayout> 
+
+       
+          <ContentView height="100%" width="100%" id="map">
                 <Mapbox
                     accessToken="pk.eyJ1IjoiZW1pbHNhbGxlbSIsImEiOiJjam5rZ3BibnMwZjZmM3dwazhsM29pcWg2In0.Kn7kBXDI7niAIHvwS2iDMw"
                     mapStyle="traffic_day"
@@ -16,7 +35,8 @@
                     disableTilt="false"
                     @mapReady="onMapReady($event)">
                 </Mapbox>
-        </GridLayout>
+            </ContentView>
+    </StackLayout>
     </Page>
 </template>
 
@@ -32,6 +52,9 @@ export default {
     barcode: {
       type: String
     },
+    name:{
+      type: String
+    },
     textFieldValue: ""
   },
   data() {
@@ -39,7 +62,8 @@ export default {
   },
   methods: {
     onMapReady(args) {
-      console.log(this.barcode);
+      
+      console.log(this.name);
       args.map.getUserLocation().then(function(userLocation) {
         console.log(
           "Current user location: " +
@@ -72,6 +96,7 @@ export default {
                 }
               }
             ]);
+
           });
         });
     }
@@ -81,15 +106,51 @@ export default {
 
 <style scoped>
 ActionBar {
-  background-color: #6202EE;
+  background-color: #6202ee;
+  color: #ffffff;
+}
+#map{
+ 
+}
+#availability {
+  margin-top: 40;
+  margin-right: 58%;
+  border: none;
+  background-color: #27ae60;
+  width: 20%;
+  text-align: center;
+  font-size: 10;
+  border-radius: 40%;
   color: #ffffff;
 }
 
-.message {
-  vertical-align: center;
+
+#product {
+  font-size: 20;
+  margin-top: 10;
+  padding-right: 80%;
+}
+#place {
+  margin-top: 40;
+  margin-left: 20%;
+}
+#price {
+  margin-left: 50%;
+  background-color: #e0e0e0;
+  width: 12%;
+  height: 60%;
   text-align: center;
   font-size: 20;
-  color: #333333;
+  
+}
+.list-group-item {
+  z-index: 10;
+  margin-bottom: 0%;
+  margin-top: 0%;
+  padding-bottom: 0%;
+  height: 10%;
+  
+
 }
 </style>
  
