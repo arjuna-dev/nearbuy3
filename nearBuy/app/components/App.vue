@@ -1,43 +1,30 @@
 
 <template>
-    <Page>
-        <ActionBar class="actionbar">
-          <StackLayout orientation="horizontal" >
-            <Image src="res://icon" width="40" height="40" id="logo"/>
-            <Label text="NearBuy" fontSize="24" id="nearbuy" />
-          </StackLayout>
-        </ActionBar>
-        <WrapLayout>
-            <!-- <SearchBar hint="Search hint" :text="searchPhrase" @textChange="onTextChanged" @submit="onSubmit" /> -->
-            <SearchBar hint="Search.." v-model="searchQuery" @submit="onButtonTap" width="100%"/>
+  <Page>
+    <ActionBar title="nearBuy"></ActionBar>
+      <TabView androidTabsPosition="bottom" selectedIndex="selectedIndex">
+        <TabViewItem title="Tab 1" iconSource="res://icon">                
+          <WrapLayout>
+            <SearchBar hint="What are you looking for today?" v-model="searchQuery" @submit="onButtonTap" />
             <ListView  for="product in searchedProds" @itemTap="onProductTap">
             <v-template>
-            <GridLayout class="list-group-item" rows="*" columns="auto, *">
-            <!-- Shows the list item label in the default color and style. -->
-            <Image row="0" col="0" src="https://firebasestorage.googleapis.com/v0/b/nearbuy-3d083.appspot.com/o/products%2F29741939-1.png?alt=media&token=af304319-6823-4005-aa0f-7c14501763cc" width="100" height="100"/>
-            <Label :text="product.name" row="0" col="1" id="product" />
-            <Label text="AVAILABLE" row="1" col="1" id="availability" />
-            <Label text="at Zani's (500m)" row="1" col="2" id="place" />
-            <Label text="10€" row="0" col="2" id="price" />
-
-            </GridLayout> 
+            <Label :text="product.name" />
             </v-template>
             </ListView>
-
-            <TabView :selectedIndex="selectedIndex" v-model="selectedIndex" @selectedIndexChange="onTabTap">
-                <TabViewItem title="" iconSource="res://icon">
-                    <Label text="" />
-                </TabViewItem>
-                <TabViewItem title="Tab 2" iconSource="res://search_icon">
-                    <Label text="" />
-                </TabViewItem>
-                <TabViewItem title="Tab 3" iconSource="res://drawable-mdpi/icon.png">
-                    <Label text="" />
-                </TabViewItem>
-            </TabView>
-
+          </WrapLayout>
+        </TabViewItem>
+        <TabViewItem title="Tab 2" iconSource="res://icon">
+        <WrapLayout>
+          <Label text="Content for Tab 2" />
         </WrapLayout>
-    </Page>
+        </TabViewItem>
+        <TabViewItem title="Tab 3" iconSource="res://drawable-mdpi/icon.png">
+        <WrapLayout>
+          <Label text="Content for Tab 3" />
+        </WrapLayout>
+        </TabViewItem>
+      </TabView>
+  </Page>
 </template>
 
 
@@ -141,6 +128,10 @@ export default {
 </script>
 
 <style scoped>
+
+/* Page{
+  height: 100%;
+} */
 ActionBar {
   background-color: #6202ee;
   color: #ffffff;
@@ -164,8 +155,6 @@ ActionBar {
   width:100%;
 }
 TabView {
-  margin-top: 90%;
-  transform: translateY(-100%);
 }
 #product {
   font-size:25;
