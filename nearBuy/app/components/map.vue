@@ -11,7 +11,7 @@
             <!-- Shows the list item label in the default color and style. -->
              <GridLayout class="list-group-item" rows="*" columns="auto, *">
             <!-- Shows the list item label in the default color and style. -->
-            <Image row="0" col="0" src="https://firebasestorage.googleapis.com/v0/b/nearbuy-3d083.appspot.com/o/products%2F29741939-1.png?alt=media&token=af304319-6823-4005-aa0f-7c14501763cc" width="100" height="100"/>
+            <Image row="0" col="0" :src="image" width="100" height="100"/>
             <Label :text="name" row="0" col="1" id="product" />
             <Label text="AVAILABLE" row="1" col="1" id="availability" />
             <Label text="at Zani's (500m)" row="1" col="2" id="place" />
@@ -54,6 +54,9 @@ export default {
     },
     name:{
       type: String
+    },
+    image:{
+      type:String
     },
     textFieldValue: ""
   },
@@ -117,6 +120,7 @@ ActionBar {
 #availability {
   margin-top: 40;
   margin-right: 58%;
+  margin-bottom: 3;
   border: none;
   background-color: #27ae60;
   width: 20%;

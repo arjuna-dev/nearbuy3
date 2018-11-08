@@ -15,7 +15,7 @@
             <v-template>
            <GridLayout class="list-group-item" rows="*" columns="auto, *">
             <!-- Shows the list item label in the default color and style. -->
-            <Image row="0" col="0" src="https://firebasestorage.googleapis.com/v0/b/nearbuy-3d083.appspot.com/o/products%2F29741939-1.png?alt=media&token=af304319-6823-4005-aa0f-7c14501763cc" width="100" height="100"/>
+            <Image row="0" col="0" :src="product.image" width="80" height="80"/>
             <Label :text="product.name" row="0" col="1" id="product" />
             <Label text="AVAILABLE" row="1" col="1" id="availability" />
             <Label text="at Zani's (500m)" row="1" col="2" id="place" />
@@ -123,7 +123,7 @@ export default {
     },
     onProductTap(event) {
       console.log(event.item.name);
-      this.$navigateTo(Map, { props: { barcode: event.item.barcode, name:event.item.name} });
+      this.$navigateTo(Map, { props: { barcode: event.item.barcode, name:event.item.name, image:event.item.image} });
     }
   },
   data() {
@@ -151,7 +151,7 @@ ActionBar {
 }
 
 #availability {
-  margin-top: 60;
+  margin-top: 50;
   margin-right: 58%;
   margin-bottom: 20;
   border: none;
@@ -169,7 +169,7 @@ ActionBar {
 TabView {
 }
 #product {
-  font-size: 25;
+  font-size: 22;
   margin-top: 10;
   padding-right: 80%;
 }
@@ -178,16 +178,16 @@ TabView {
   z-index: 10;
 }
 #place {
-  margin-top: 60;
-  margin-left: 20%;
+  margin-top: 50;
+  margin-left: 24%;
 }
 #price {
-  margin-left: 50%;
+  margin-left: 58%;
   background-color: #e0e0e0;
   width: 12%;
   height: 20%;
   text-align: center;
-  font-size: 25;
+  font-size: 22;
 }
 SearchBar{
   width: 100%
