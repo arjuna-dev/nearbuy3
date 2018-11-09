@@ -30,7 +30,7 @@
           <Label text="Content for Tab 2" />
         </WrapLayout>
         </TabViewItem>
-        <TabViewItem title="Tab 3" iconSource="res://gps">
+        <TabViewItem title="Tab 3" iconSource="res://favorite">
         <WrapLayout>
           <Label text="Content for Tab 3" />
         </WrapLayout>
