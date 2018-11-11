@@ -13,7 +13,7 @@
 
     <TabView androidTabsPosition="bottom" selectedIndex="selectedIndex">
 
-      <TabViewItem title="searchTab" iconSource="res://search">
+      <TabViewItem iconSource="res://search">
         <WrapLayout>
           <SearchBar hint="What are you looking for today?" v-model="searchQuery" @submit="onButtonTap" />
           <ListView  for="product in searchedProds" @itemTap="onProductTap">
@@ -31,7 +31,7 @@
         </WrapLayout>
       </TabViewItem>
 
-      <TabViewItem title="mapTab" iconSource="res://map">           
+      <TabViewItem iconSource="res://map">           
         <StackLayout>
           <ContentView height="100%" width="100%" id="map">
             <Mapbox
@@ -52,7 +52,7 @@
         </StackLayout>
       </TabViewItem>
     
-      <TabViewItem title="favTab" iconSource="res://favorite">
+      <TabViewItem iconSource="res://favorite">
         <StackLayout>
           <GridLayout class="list-group-item" rows="*" columns="auto, *">
             <!-- Shows the list item label in the default color and style. -->
