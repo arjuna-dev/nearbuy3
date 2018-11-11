@@ -20,7 +20,7 @@
             <!-- Shows the list item label in the default color and style. -->
             <Image row="0" col="0" :src="product.image" width="80" height="80"/>
             <Label :text="product.name" row="0" col="1" id="product" />
-            <Label text="AVAILABLE" row="1" col="1" id="availability" />
+            <Label text="CLOSE" row="1" col="1" id="availability" />
             <Label text="at Zani's (500m)" row="1" col="2" id="place" />
             <Label text="10€" row="0" col="2" id="price" />
             </GridLayout> 
@@ -30,12 +30,12 @@
         </TabViewItem>
         <TabViewItem title="Tab 2" iconSource="res://map">
         <WrapLayout>
-          <Label text="Content for Tab 2" />
+          <Label text="" />
         </WrapLayout>
         </TabViewItem>
         <TabViewItem title="Tab 3" iconSource="res://favorite">
         <WrapLayout>
-          <Label text="Content for Tab 3" />
+          <Label text="" />
         </WrapLayout>
         </TabViewItem>
       </TabView>
@@ -72,7 +72,8 @@ export default {
     
     onTabTap() {
       console.log(this.$data.selectedIndex.value);
-      if (this.$data.selectedIndex.value == 1){
+
+      if (this.$data.selectedIndex.value == 2){
         this.$navigateTo(favs);
       }
 
@@ -136,7 +137,9 @@ export default {
   },
   data() {
     return {
-      selectedIndex: 0,
+      selectedIndex: {
+        type:Number
+      },
       searchQuery: "",
       textFieldValue: "",
       searchedProds: []
