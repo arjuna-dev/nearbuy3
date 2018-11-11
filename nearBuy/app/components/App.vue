@@ -7,7 +7,7 @@
             <Label text="NearBuy" fontSize="24" id="nearbuy" />
           </StackLayout>
     </ActionBar>
-      <TabView androidTabsPosition="bottom" selectedIndex="selectedIndex">
+      <TabView androidTabsPosition="bottom" selectedIndex="selectedIndex" v-model="selectedIndex" @selectedIndexChange="onTabTap">
         <TabViewItem title="Tab 1" iconSource="res://search">
           <WrapLayout>
             <SearchBar hint="What are you looking for today?" v-model="searchQuery" @submit="onButtonTap" />
@@ -43,6 +43,7 @@
 <script>
 //Importing the map component
 import Map from "./map";
+import favs from "./favs";
 import { sep } from "path";
 import { login } from "nativescript-plugin-firebase";
 let searchProductResults = [];
@@ -68,6 +69,11 @@ export default {
     
     onTabTap() {
       console.log(this.$data.selectedIndex.value);
+      if (this.$data.selectedIndex.value == 1){
+        this.$navigateTo(favs);
+      }
+
+
     },
     onButtonTap() {
       //console.log(this.$data.textFieldValue);
