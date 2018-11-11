@@ -1,4 +1,7 @@
-
+<!--Frequently used command line stuff:-->
+<!--tns run android --bundle-->
+<!--tns build android --bundle-->
+<!--tns platform remove android && tns platform add android-->
 <template>
   <Page>
     <ActionBar class="actionbar">

@@ -1,43 +1,57 @@
 <template>
-    <Page class="page">
-        <ActionBar class="actionbar">
-          <StackLayout orientation="horizontal" >
-            <Image src="res://baseline_keyboard_arrow_left_white_18" width="40" height="40" id="logo" @tap="$navigateBack"/>
+  <Page class="page">
+    <ActionBar class="actionbar">
+      <StackLayout orientation="horizontal" >
+        <Image src="res://baseline_keyboard_arrow_left_white_18" width="40" height="40" id="logo" @tap="$navigateBack"/>
             <Label :text="name" fontSize="24" id="nearbuy" />
-          </StackLayout>
+      </StackLayout>
     </ActionBar>
-    <StackLayout>
-    
-            <!-- Shows the list item label in the default color and style. -->
-             <GridLayout class="list-group-item" rows="*" columns="auto, *">
-            <!-- Shows the list item label in the default color and style. -->
-            <Image row="0" col="0" :src="image" width="100" height="100"/>
-            <Label :text="name" row="0" col="1" id="product" />
-            <Label text="AVAILABLE" row="1" col="1" id="availability" />
-            <Label text="at Zani's (500m)" row="1" col="2" id="place" />
-            <Label text="10€" row="0" col="2" id="price" />
 
-            </GridLayout> 
-
-       
-          <ContentView height="100%" width="100%" id="map">
+    <TabView androidTabsPosition="bottom" selectedIndex="selectedIndex">
+        <TabViewItem title="Tab 1" iconSource="res://search">
+          <WrapLayout>            
+            <StackLayout>
+              <!-- Shows the list item label in the default color and style. -->
+              <GridLayout class="list-group-item" rows="*" columns="auto, *">
+              <!-- Shows the list item label in the default color and style. -->
+              <Image row="0" col="0" :src="image" width="100" height="100"/>
+              <Label :text="name" row="0" col="1" id="product" />
+              <Label text="AVAILABLE" row="1" col="1" id="availability" />
+              <Label text="at Zani's (500m)" row="1" col="2" id="place" />
+              <Label text="10€" row="0" col="2" id="price" />
+              </GridLayout> 
+              <ContentView height="100%" width="100%" id="map">
                 <Mapbox
-                    accessToken="pk.eyJ1IjoiZW1pbHNhbGxlbSIsImEiOiJjam5rZ3BibnMwZjZmM3dwazhsM29pcWg2In0.Kn7kBXDI7niAIHvwS2iDMw"
-                    mapStyle="traffic_day"
-                    latitude="52.493997"
-                    longitude="13.446464"
-                    hideCompass="true"
-                    zoomLevel="12"
-                    showUserLocation="true"
-                    disableZoom="false"
-                    disableRotation="false"
-                    disableScroll="false"
-                    disableTilt="false"
-                    @mapReady="onMapReady($event)">
+                  accessToken="pk.eyJ1IjoiZW1pbHNhbGxlbSIsImEiOiJjam5rZ3BibnMwZjZmM3dwazhsM29pcWg2In0.Kn7kBXDI7niAIHvwS2iDMw"
+                  mapStyle="traffic_day"
+                  latitude="52.493997"
+                  longitude="13.446464"
+                  hideCompass="true"
+                  zoomLevel="12"
+                  showUserLocation="true"
+                  disableZoom="false"
+                  disableRotation="false"
+                  disableScroll="false"
+                  disableTilt="false"
+                  @mapReady="onMapReady($event)">
                 </Mapbox>
-            </ContentView>
-    </StackLayout>
-    </Page>
+              </ContentView>
+            </StackLayout>
+          </WrapLayout>
+        </TabViewItem>
+        <TabViewItem title="Tab 2" iconSource="res://map">
+        <WrapLayout>
+          <Label text="Content for Tab 2" />
+        </WrapLayout>
+        </TabViewItem>
+        <TabViewItem title="Tab 3" iconSource="res://favorite">
+        <WrapLayout>
+          <Label text="Content for Tab 3" />
+        </WrapLayout>
+        </TabViewItem>
+      </TabView>
+
+  </Page>
 </template>
 
 
