@@ -22,9 +22,9 @@
           <!-- Shows the list item label in the default color and style. -->
           <Image row="0" col="0" :src="product.image" width="80" height="80"/>
           <Label :text="product.name" row="0" col="1" id="product" />
-          <Label text="Nearbuy" row="1" col="1" id="availability" />
+          <Label text="Nearbuy" row="1" col="1" class="availability" />
           <Label text="at Zani's (500m)" row="1" col="2" id="place" />
-          <Label text="10€" row="0" col="2" id="price" />
+          <Label text="10€" row="0" col="2" id="search-price" />
           </GridLayout> 
           </v-template>
           </ListView>
@@ -57,18 +57,18 @@
           <GridLayout class="list-group-item" rows="*" columns="auto, *">
             <!-- Shows the list item label in the default color and style. -->
             <Image row="0" col="0" src="https://firebasestorage.googleapis.com/v0/b/nearbuy-3d083.appspot.com/o/products%2Fclubmate.jpg?alt=media&token=380a7643-8aad-4b5c-8961-c329c7d8d7c2" width="80" height="80"/>
-            <Label text=" Club Mate" row="0" col="1" id="product" />
-            <Label text="Nearbuy" row="1" col="1" id="availability" />
-            <Label text="at Zani's (500m)" row="1" col="2" id="place" />
-            <Label text="10€" row="0" col="2" id="price" />
+            <Label text=" Club Mate" row="0" col="1" class="product" />
+            <Label text="Nearbuy" row="1" col="1" class="availability" />
+            <Label text="at Zani's (500m)" row="1" col="2" class="place" />
+            <Label text="10€" row="0" col="2" class="fav-price" />
             </GridLayout>
             <GridLayout class="list-group-item" rows="*" columns="auto, *">
             <!-- Shows the list item label in the default color and style. -->
             <Image row="0" col="0" src="https://firebasestorage.googleapis.com/v0/b/nearbuy-3d083.appspot.com/o/products%2Fclubmate.jpg?alt=media&token=380a7643-8aad-4b5c-8961-c329c7d8d7c2" width="80" height="80"/>
-            <Label text=" Club Mate" row="0" col="1" id="product" />
-            <Label text="CLOSE" row="1" col="1" id="availability" />
-            <Label text="at Zani's (500m)" row="1" col="2" id="place" />
-            <Label text="10€" row="0" col="2" id="price" />
+            <Label text=" Club Mate" row="0" col="1" class="product" />
+            <Label text="Nearbuy" row="1" col="1" class="availability" />
+            <Label text="at Zani's (500m)" row="1" col="2" class="place" />
+            <Label text="10€" row="0" col="2" class="fav-price" />
           </GridLayout>
         </StackLayout>    
       </TabViewItem>
@@ -240,23 +240,23 @@ ActionBar {
   background-color: red;
 }
 
-#availability {
+.availability {
   margin-top: 50;
   margin-right: 58%;
   margin-bottom: 20;
   border: none;
-  /* background-color: #27ae60; */
+  background-color: #27ae60;
+  padding: 3%;
   width: 20%;
   text-align: center;
   border-radius: 40%;
-  /* color: #ffffff; */
+  color: #ffffff;
 }
+
 #icon,
 #nearbuy {
   margin-right: 80%;
   width: 100%;
-}
-TabView {
 }
 #product {
   font-size: 22;
@@ -271,13 +271,13 @@ TabView {
   margin-top: 50;
   margin-left: 24%;
 }
-#price {
+#search-price {
   margin-left: 58%;
   background-color: #e0e0e0;
   width: 12%;
   height: 20%;
   text-align: center;
-  font-size: 22;
+  font-size: 15;
 }
 SearchBar{
   width: 100%
@@ -285,21 +285,10 @@ SearchBar{
 
 
 /* css for mapTab */
-#availability {
-  margin-top: 40;
-  margin-right: 58%;
-  margin-bottom: 3;
-  border: none;
-  /* background-color: #27ae60; */
-  width: 20%;
-  text-align: center;
-  /* font-size: 10; */
-  border-radius: 40%;
-  /* color: #ffffff; */
-}
+/* css for mapTab */
+/* css for mapTab */
 
-
-#product {
+/* #product {
   font-size: 20;
   margin-top: 10;
   padding-right: 80%;
@@ -323,6 +312,39 @@ SearchBar{
   margin-top: 0%;
   padding-bottom: 0%;
   height: 10%;
+} */
+
+/* css for favorites */
+/* css for favorites */
+/* css for favorites */
+
+#icon,
+#nearbuy {
+  margin-right: 80%;
+  width: 100%;
 }
 
+.product {
+  font-size: 22;
+  margin-top: 10;
+  padding-right: 80%;
+}
+.list-group-item {
+  border: 10 solid black;
+  
+  height: 18%;
+ 
+}
+.place {
+  margin-top: 50;
+  margin-left: 24%;
+}
+.fav-price {
+  margin-left: 58%;
+  background-color: #e0e0e0;
+  width: 12%;
+  height: 20%;
+  text-align: center;
+  font-size: 15;
+}
 </style>
