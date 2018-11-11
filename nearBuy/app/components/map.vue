@@ -65,6 +65,7 @@ export default {
     
     onMapReady(args) {
       
+      console.log('onMapReady runing from map.vue');
       console.log(this.name);
       args.map.getUserLocation().then(function(userLocation) {
         console.log(

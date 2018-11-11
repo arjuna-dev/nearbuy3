@@ -32,7 +32,7 @@
       </TabViewItem>
 
       <TabViewItem title="mapTab" iconSource="res://map">           
-        <WrapLayout>
+        <StackLayout>
           <ContentView height="100%" width="100%" id="map">
             <Mapbox
               accessToken="pk.eyJ1IjoiZW1pbHNhbGxlbSIsImEiOiJjam5rZ3BibnMwZjZmM3dwazhsM29pcWg2In0.Kn7kBXDI7niAIHvwS2iDMw"
@@ -49,9 +49,9 @@
               @mapReady="onMapReady($event)">
             </Mapbox>
           </ContentView>
-        </WrapLayout>
+        </StackLayout>
       </TabViewItem>
-
+    
       <TabViewItem title="favTab" iconSource="res://favorite">
         <StackLayout>
           <GridLayout class="list-group-item" rows="*" columns="auto, *">
@@ -117,7 +117,7 @@ export default {
   },
   methods: {
     onMapReady(args) {
-      
+      console.log('onMapReady runing from app.vue');
       console.log(this.name);
       args.map.getUserLocation().then(function(userLocation) {
         console.log(
@@ -128,11 +128,6 @@ export default {
         );
         console.log("Current user speed: " + userLocation.speed);
       });
-      /*args.map.setCenter({
-        lat: 52.360216, // mandatory
-        lng: 4.889168, // mandatory
-        animated: false // default true
-      });*/
       var storesCollection = firebase.firestore.collection("stores");
       storesCollection
         .where("products", "array-contains", this.barcode)
