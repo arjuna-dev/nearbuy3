@@ -29,9 +29,35 @@
           </WrapLayout>
         </TabViewItem>
         <TabViewItem title="Tab 2" iconSource="res://map">
-        <WrapLayout>
-          <Label text="Content for Tab 2" />
-        </WrapLayout>
+          <WrapLayout>            
+            <StackLayout>
+              <!-- Shows the list item label in the default color and style. -->
+              <GridLayout class="list-group-item" rows="*" columns="auto, *">
+              <!-- Shows the list item label in the default color and style. -->
+              <Image row="0" col="0" :src="image" width="100" height="100"/>
+              <Label :text="name" row="0" col="1" id="product" />
+              <Label text="AVAILABLE" row="1" col="1" id="availability" />
+              <Label text="at Zani's (500m)" row="1" col="2" id="place" />
+              <Label text="10€" row="0" col="2" id="price" />
+              </GridLayout> 
+              <ContentView height="100%" width="100%" id="map">
+                <Mapbox
+                  accessToken="pk.eyJ1IjoiZW1pbHNhbGxlbSIsImEiOiJjam5rZ3BibnMwZjZmM3dwazhsM29pcWg2In0.Kn7kBXDI7niAIHvwS2iDMw"
+                  mapStyle="traffic_day"
+                  latitude="52.493997"
+                  longitude="13.446464"
+                  hideCompass="true"
+                  zoomLevel="12"
+                  showUserLocation="true"
+                  disableZoom="false"
+                  disableRotation="false"
+                  disableScroll="false"
+                  disableTilt="false"
+                  @mapReady="onMapReady($event)">
+                </Mapbox>
+              </ContentView>
+            </StackLayout>
+          </WrapLayout>
         </TabViewItem>
         <TabViewItem title="Tab 3" iconSource="res://favorite">
         <WrapLayout>
