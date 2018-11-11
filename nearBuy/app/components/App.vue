@@ -8,7 +8,7 @@
           </StackLayout>
     </ActionBar>
       <TabView androidTabsPosition="bottom" selectedIndex="selectedIndex">
-        <TabViewItem title="Tab 1" iconSource="res://icon">                
+        <TabViewItem title="Tab 1" iconSource="res://search">
           <WrapLayout>
             <SearchBar hint="What are you looking for today?" v-model="searchQuery" @submit="onButtonTap" />
             <ListView  for="product in searchedProds" @itemTap="onProductTap">
@@ -20,18 +20,17 @@
             <Label text="AVAILABLE" row="1" col="1" id="availability" />
             <Label text="at Zani's (500m)" row="1" col="2" id="place" />
             <Label text="10€" row="0" col="2" id="price" />
-
             </GridLayout> 
             </v-template>
             </ListView>
           </WrapLayout>
         </TabViewItem>
-        <TabViewItem title="Tab 2" iconSource="res://icon">
+        <TabViewItem title="Tab 2" iconSource="res://map">
         <WrapLayout>
           <Label text="Content for Tab 2" />
         </WrapLayout>
         </TabViewItem>
-        <TabViewItem title="Tab 3" iconSource="res://drawable-mdpi/icon.png">
+        <TabViewItem title="Tab 3" iconSource="res://gps">
         <WrapLayout>
           <Label text="Content for Tab 3" />
         </WrapLayout>
@@ -148,6 +147,12 @@ export default {
 ActionBar {
   background-color: #6202ee;
   color: #ffffff;
+}
+
+#search-icon{
+  width:30;
+  height:30;
+  background-color: red;
 }
 
 #availability {
