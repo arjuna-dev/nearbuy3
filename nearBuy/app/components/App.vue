@@ -10,49 +10,72 @@
             <Label text="NearBuy" fontSize="24" id="nearbuy" />
           </StackLayout>
     </ActionBar>
-      <TabView androidTabsPosition="bottom" selectedIndex="selectedIndex" v-model="selectedIndex" @selectedIndexChange="onTabTap">
-        <TabViewItem title="Tab 1" iconSource="res://search">
-          <WrapLayout>
-            <SearchBar hint="What are you looking for today?" v-model="searchQuery" @submit="onButtonTap" />
-            <ListView  for="product in searchedProds" @itemTap="onProductTap">
-            <v-template>
-           <GridLayout class="list-group-item" rows="*" columns="auto, *">
+
+    <TabView androidTabsPosition="bottom" selectedIndex="selectedIndex" v-model="selectedIndex" @selectedIndexChange="onTabTap">
+
+      <TabViewItem title="searchTab" iconSource="res://search">
+        <WrapLayout>
+          <SearchBar hint="What are you looking for today?" v-model="searchQuery" @submit="onButtonTap" />
+          <ListView  for="product in searchedProds" @itemTap="onProductTap">
+          <v-template>
+          <GridLayout class="list-group-item" rows="*" columns="auto, *">
+          <!-- Shows the list item label in the default color and style. -->
+          <Image row="0" col="0" :src="product.image" width="80" height="80"/>
+          <Label :text="product.name" row="0" col="1" id="product" />
+          <Label text="Nearbuy" row="1" col="1" id="availability" />
+          <Label text="at Zani's (500m)" row="1" col="2" id="place" />
+          <Label text="10€" row="0" col="2" id="price" />
+          </GridLayout> 
+          </v-template>
+          </ListView>
+        </WrapLayout>
+      </TabViewItem>
+
+      <TabViewItem title="mapTab" iconSource="res://map" >           
+        <StackLayout>
+       
+         
+        </StackLayout>
+      </TabViewItem>
+    
+      <TabViewItem title="favTab" iconSource="res://favorite">
+        <StackLayout>
+          <GridLayout class="list-group-item" rows="*" columns="auto, *">
             <!-- Shows the list item label in the default color and style. -->
-            <Image row="0" col="0" :src="product.image" width="80" height="80"/>
-            <Label :text="product.name" row="0" col="1" id="product" />
+            <Image row="0" col="0" src="https://firebasestorage.googleapis.com/v0/b/nearbuy-3d083.appspot.com/o/products%2Fclubmate.jpg?alt=media&token=380a7643-8aad-4b5c-8961-c329c7d8d7c2" width="80" height="80"/>
+            <Label text=" Club Mate" row="0" col="1" id="product" />
+            <Label text="Nearbuy" row="1" col="1" id="availability" />
+            <Label text="at Zani's (500m)" row="1" col="2" id="place" />
+            <Label text="10€" row="0" col="2" id="price" />
+            </GridLayout>
+            <GridLayout class="list-group-item" rows="*" columns="auto, *">
+            <!-- Shows the list item label in the default color and style. -->
+            <Image row="0" col="0" src="https://firebasestorage.googleapis.com/v0/b/nearbuy-3d083.appspot.com/o/products%2Fclubmate.jpg?alt=media&token=380a7643-8aad-4b5c-8961-c329c7d8d7c2" width="80" height="80"/>
+            <Label text=" Club Mate" row="0" col="1" id="product" />
             <Label text="CLOSE" row="1" col="1" id="availability" />
             <Label text="at Zani's (500m)" row="1" col="2" id="place" />
             <Label text="10€" row="0" col="2" id="price" />
-            </GridLayout> 
-            </v-template>
-            </ListView>
-          </WrapLayout>
-        </TabViewItem>
-        <TabViewItem title="Tab 2" iconSource="res://map">
-        <WrapLayout>
-          <Label text="" />
-        </WrapLayout>
-        </TabViewItem>
-        <TabViewItem title="Tab 3" iconSource="res://favorite">
-        <WrapLayout>
-          <Label text="" />
-        </WrapLayout>
-        </TabViewItem>
-      </TabView>
+          </GridLayout>
+        </StackLayout>    
+      </TabViewItem>
+      
+    </TabView>
   </Page>
 </template>
 
 
 <script>
 //Importing the map component
+const firebase = require("nativescript-plugin-firebase");
+const mapbox = require("nativescript-mapbox");
+import * as utils from "utils/utils";
+import explore from "./explore";
 import Map from "./map";
 import favs from "./favs";
 import { sep } from "path";
 import { login } from "nativescript-plugin-firebase";
 let searchProductResults = [];
 //Wiring firebase
-const firebase = require("nativescript-plugin-firebase");
-
 firebase
   .init({
     // Optionally pass in properties for database, authentication and cloud messaging,
@@ -68,13 +91,28 @@ firebase
   );
 console.log("i am app");
 export default {
+  props: {
+    barcode: {
+      type: String
+    },
+    name:{
+      type: String
+    },
+    image:{
+      type:String
+    },
+    textFieldValue: ""
+  },
   methods: {
-    
+    onMapReady(args) {
+      console.log('onMapReady runing from app.vue');
+      
+    },
     onTabTap() {
       console.log(this.$data.selectedIndex.value);
 
-      if (this.$data.selectedIndex.value == 2){
-        this.$navigateTo(favs);
+      if (this.$data.selectedIndex.value == 1){
+        this.$navigateTo(explore);
       }
 
 
@@ -132,6 +170,7 @@ export default {
     },
     onProductTap(event) {
       console.log(event.item.name);
+      
       this.$navigateTo(Map, { props: { barcode: event.item.barcode, name:event.item.name, image:event.item.image} });
     }
   },
@@ -160,7 +199,9 @@ ActionBar {
   background-color: #6202ee;
   color: #ffffff;
 }
-
+#map{
+  height: 100%;
+}
 #search-icon{
   width:30;
   height:30;
@@ -172,11 +213,11 @@ ActionBar {
   margin-right: 58%;
   margin-bottom: 20;
   border: none;
-  background-color: #27ae60;
+  /* background-color: #27ae60; */
   width: 20%;
   text-align: center;
   border-radius: 40%;
-  color: #ffffff;
+  /* color: #ffffff; */
 }
 #icon,
 #nearbuy {
@@ -209,4 +250,47 @@ TabView {
 SearchBar{
   width: 100%
 }
+
+
+/* css for mapTab */
+#availability {
+  margin-top: 40;
+  margin-right: 58%;
+  margin-bottom: 3;
+  border: none;
+  /* background-color: #27ae60; */
+  width: 20%;
+  text-align: center;
+  /* font-size: 10; */
+  border-radius: 40%;
+  /* color: #ffffff; */
+}
+
+
+#product {
+  font-size: 20;
+  margin-top: 10;
+  padding-right: 80%;
+}
+#place {
+  margin-top: 40;
+  margin-left: 20%;
+}
+#price {
+  margin-left: 50%;
+  background-color: #e0e0e0;
+  width: 12%;
+  height: 60%;
+  text-align: center;
+  font-size: 20;
+  
+}
+.list-group-item {
+  z-index: 10;
+  margin-bottom: 0%;
+  margin-top: 0%;
+  padding-bottom: 0%;
+  height: 10%;
+}
+
 </style>

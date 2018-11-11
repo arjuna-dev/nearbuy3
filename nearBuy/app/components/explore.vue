@@ -1,22 +1,14 @@
 <template>
   <Page class="page">
     <ActionBar class="actionbar">
-      <StackLayout orientation="horizontal" >
+      <StackLayout orientation="horizontal" id="actionbar">
         <Image src="res://baseline_keyboard_arrow_left_white_18" width="40" height="40" id="logo" @tap="$navigateBack"/>
-            <Label :text="name" fontSize="24" id="nearbuy" />
+            <Label text="Explore" fontSize="24" id="nearbuy" />
       </StackLayout>
     </ActionBar>   
 
       <StackLayout>
-        <!-- Shows the list item label in the default color and style. -->
-        <GridLayout class="list-group-item" rows="*" columns="auto, *">
-        <!-- Shows the list item label in the default color and style. -->
-        <Image row="0" col="0" :src="image" width="100" height="100"/>
-        <Label :text="name" row="0" col="1" id="product" />
-        <Label text="Nearbuy" row="1" col="1" id="availability" />
-        <Label text="at Zani's (500m)" row="1" col="2" id="place" />
-        <Label text="10€" row="0" col="2" id="price" />
-        </GridLayout> 
+     
         
         <ContentView height="100%" width="100%" id="map">
           <Mapbox
@@ -83,7 +75,7 @@ export default {
       });*/
       var storesCollection = firebase.firestore.collection("stores");
       storesCollection
-        .where("products", "array-contains", this.barcode)
+        
         .get()
         .then(function(querySnapshot) {
           querySnapshot.forEach(function(doc) {
@@ -113,6 +105,8 @@ ActionBar {
   background-color: #6202ee;
   color: #ffffff;
 }
+
+
 #map{
  
 }
@@ -155,7 +149,6 @@ ActionBar {
   padding-bottom: 0%;
   height: 10%;
 }
-
 </style>
  
 
