@@ -1,0 +1,154 @@
+<template>
+  <Page class="page">
+    <ActionBar class="actionbar">
+      <StackLayout orientation="horizontal" id="actionbar">
+        <Image src="res://baseline_keyboard_arrow_left_white_18" width="40" height="40" id="logo" @tap="$navigateBack"/>
+            <Label text="Explore" fontSize="24" id="nearbuy" />
+      </StackLayout>
+    </ActionBar>   
+
+      <StackLayout>
+     
+        
+        <ContentView height="100%" width="100%" id="map">
+          <Mapbox
+            accessToken="pk.eyJ1IjoiZW1pbHNhbGxlbSIsImEiOiJjam5rZ3BibnMwZjZmM3dwazhsM29pcWg2In0.Kn7kBXDI7niAIHvwS2iDMw"
+            mapStyle="traffic_day"
+            latitude="52.493997"
+            longitude="13.446464"
+            hideCompass="true"
+            zoomLevel="12"
+            showUserLocation="true"
+            disableZoom="false"
+            disableRotation="false"
+            disableScroll="false"
+            disableTilt="false"
+            @mapReady="onMapReady($event)">
+          </Mapbox>
+        </ContentView>
+      </StackLayout>
+  </Page>
+</template>
+
+
+<script>
+const firebase = require("nativescript-plugin-firebase");
+const mapbox = require("nativescript-mapbox");
+
+console.log("im map");
+import * as utils from "utils/utils";
+export default {
+  props: {
+    barcode: {
+      type: String
+    },
+    name:{
+      type: String
+    },
+    image:{
+      type:String
+    },
+    textFieldValue: ""
+  },
+  data() {
+    return {};
+  },
+  methods: {
+    
+    onMapReady(args) {
+      
+      console.log('onMapReady runing from map.vue');
+      console.log(this.name);
+      args.map.getUserLocation().then(function(userLocation) {
+        console.log(
+          "Current user location: " +
+            userLocation.location.lat +
+            ", " +
+            userLocation.location.lng
+        );
+        console.log("Current user speed: " + userLocation.speed);
+      });
+      /*args.map.setCenter({
+        lat: 52.360216, // mandatory
+        lng: 4.889168, // mandatory
+        animated: false // default true
+      });*/
+      var storesCollection = firebase.firestore.collection("stores");
+      storesCollection
+        
+        .get()
+        .then(function(querySnapshot) {
+          querySnapshot.forEach(function(doc) {
+            console.log(doc.data());
+            args.map.addMarkers([
+              {
+                lat: doc.data().xcord,
+                lng: doc.data().ycord,
+                title: doc.data().name,
+                subtitle: "Home of The Polyglot Developer!",
+                icon: 'res://map_marker',
+                onCalloutTap: () => {
+                  utils.openUrl("https://www.thepolyglotdeveloper.com");
+                }
+              }
+            ]);
+
+          });
+        });
+    }
+  }
+};
+</script> 
+
+<style scoped>
+ActionBar {
+  background-color: #6202ee;
+  color: #ffffff;
+}
+
+
+#map{
+ 
+}
+#availability {
+  margin-top: 40;
+  margin-right: 58%;
+  margin-bottom: 3;
+  border: none;
+  /* background-color: #27ae60; */
+  width: 20%;
+  text-align: center;
+  /* font-size: 10; */
+  border-radius: 40%;
+  /* color: #ffffff; */
+}
+
+
+#product {
+  font-size: 20;
+  margin-top: 10;
+  padding-right: 80%;
+}
+#place {
+  margin-top: 40;
+  margin-left: 20%;
+}
+#price {
+  margin-left: 50%;
+  background-color: #e0e0e0;
+  width: 12%;
+  height: 60%;
+  text-align: center;
+  font-size: 20;
+  
+}
+.list-group-item {
+  z-index: 10;
+  margin-bottom: 0%;
+  margin-top: 0%;
+  padding-bottom: 0%;
+  height: 10%;
+}
+</style>
+ 
+

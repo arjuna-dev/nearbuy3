@@ -11,7 +11,7 @@
           </StackLayout>
     </ActionBar>
 
-    <TabView androidTabsPosition="bottom" selectedIndex="selectedIndex">
+    <TabView androidTabsPosition="bottom" selectedIndex="selectedIndex" v-model="selectedIndex" @selectedIndexChange="onTabTap">
 
       <TabViewItem title="searchTab" iconSource="res://search">
         <WrapLayout>
@@ -31,24 +31,10 @@
         </WrapLayout>
       </TabViewItem>
 
-      <TabViewItem title="mapTab" iconSource="res://map">           
+      <TabViewItem title="mapTab" iconSource="res://map" >           
         <StackLayout>
-          <ContentView height="100%" width="100%" id="map">
-            <Mapbox
-              accessToken="pk.eyJ1IjoiZW1pbHNhbGxlbSIsImEiOiJjam5rZ3BibnMwZjZmM3dwazhsM29pcWg2In0.Kn7kBXDI7niAIHvwS2iDMw"
-              mapStyle="traffic_day"
-              latitude="52.493997"
-              longitude="13.446464"
-              hideCompass="true"
-              zoomLevel="12"
-              showUserLocation="true"
-              disableZoom="false"
-              disableRotation="false"
-              disableScroll="false"
-              disableTilt="false"
-              @mapReady="onMapReady($event)">
-            </Mapbox>
-          </ContentView>
+       
+         
         </StackLayout>
       </TabViewItem>
     
@@ -83,6 +69,7 @@
 const firebase = require("nativescript-plugin-firebase");
 const mapbox = require("nativescript-mapbox");
 import * as utils from "utils/utils";
+import explore from "./explore";
 import Map from "./map";
 import { sep } from "path";
 import { login } from "nativescript-plugin-firebase";
@@ -118,41 +105,15 @@ export default {
   methods: {
     onMapReady(args) {
       console.log('onMapReady runing from app.vue');
-      console.log(this.name);
-      args.map.getUserLocation().then(function(userLocation) {
-        console.log(
-          "Current user location: " +
-            userLocation.location.lat +
-            ", " +
-            userLocation.location.lng
-        );
-        console.log("Current user speed: " + userLocation.speed);
-      });
-      var storesCollection = firebase.firestore.collection("stores");
-      storesCollection
-        .where("products", "array-contains", this.barcode)
-        .get()
-        .then(function(querySnapshot) {
-          querySnapshot.forEach(function(doc) {
-            console.log(doc.data());
-            args.map.addMarkers([
-              {
-                lat: doc.data().xcord,
-                lng: doc.data().ycord,
-                title: doc.data().name,
-                subtitle: "Home of The Polyglot Developer!",
-                icon: 'res://map_marker',
-                onCalloutTap: () => {
-                  utils.openUrl("https://www.thepolyglotdeveloper.com");
-                }
-              }
-            ]);
-
-          });
-        });
+      
     },
     onTabTap() {
       console.log(this.$data.selectedIndex.value);
+      if(this.$data.selectedIndex.value == 1){
+        this.$navigateTo(explore);
+
+      }
+
     },
     onButtonTap() {
       //console.log(this.$data.textFieldValue);
@@ -207,6 +168,7 @@ export default {
     },
     onProductTap(event) {
       console.log(event.item.name);
+      
       this.$navigateTo(Map, { props: { barcode: event.item.barcode, name:event.item.name, image:event.item.image} });
     }
   },
@@ -233,7 +195,9 @@ ActionBar {
   background-color: #6202ee;
   color: #ffffff;
 }
-
+#map{
+  height: 100%;
+}
 #search-icon{
   width:30;
   height:30;
